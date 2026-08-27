@@ -169,60 +169,58 @@ export const wrappedStats: WrappedStat[] = [
  *  Replace date / title / caption / code. Keep `image` names or change them.
  * ========================================================================= */
 
-const layouts: MemoryLayout[] = [
-  "wide",
-  "polaroid",
-  "tall",
-  "card",
-  "strip",
-  "small",
-  "card",
-  "tall",
-  "wide",
-  "polaroid",
-  "card",
-  "small",
-  "strip",
-  "tall",
-  "card",
-  "polaroid",
-  "wide",
-  "small",
-  "card",
-  "tall",
-];
-
-export const memories: Memory[] = Array.from({ length: 20 }, (_, i) => {
-  const n = String(i + 1).padStart(2, "0");
-  const year = i < 7 ? "2024" : i < 15 ? "2025" : "2026";
+/** helper so each entry below stays short — override anything you like */
+function memory(
+  n: number,
+  layout: MemoryLayout,
+  year: string,
+  extra: Partial<Omit<Memory, "id">> = {},
+): Memory {
+  const id = String(n).padStart(2, "0");
   return {
-    id: n,
-    image: `/memories/memory-${n}.jpg`,
+    id,
+    image: `/memories/memory-${id}.jpg`,
     date: "EDIT DATE",
     title: "EDIT TITLE",
     caption: "EDIT CAPTION",
-    code: `R + H // ${n}`,
+    code: `R + H // ${id}`,
     year,
-    layout: layouts[i],
-    featured: i === 0 || i === 8 || i === 16,
+    layout,
+    ...extra,
   };
-});
+}
 
-/* a few marked SECRET — change the indexes / messages however you want */
-memories[3] = {
-  ...memories[3],
-  secret: true,
-  secretMessage: "You definitely remember this one.",
-};
-memories[9] = {
-  ...memories[9],
-  secret: true,
-  secretMessage: "We are never explaining this.",
-};
-memories[14] = {
-  ...memories[14],
-  secret: true,
-  secretMessage: "Yeah... that happened.",
-};
+export const memories: Memory[] = [
+  memory(1, "wide", "2024", { featured: true }),
+  memory(2, "polaroid", "2024"),
+  memory(3, "tall", "2024"),
+  memory(4, "card", "2024", {
+    secret: true,
+    secretMessage: "You definitely remember this one.",
+  }),
+  memory(5, "strip", "2024"),
+  memory(6, "small", "2024"),
+  memory(7, "card", "2024"),
+  memory(8, "tall", "2025"),
+  memory(9, "wide", "2025", { featured: true }),
+  memory(10, "polaroid", "2025", {
+    secret: true,
+    secretMessage: "We are never explaining this.",
+  }),
+  memory(11, "card", "2025"),
+  memory(12, "small", "2025"),
+  memory(13, "strip", "2025"),
+  memory(14, "tall", "2025"),
+  memory(15, "card", "2025", {
+    secret: true,
+    secretMessage: "Yeah... that happened.",
+  }),
+  memory(16, "polaroid", "2026"),
+  memory(17, "wide", "2026", { featured: true }),
+  memory(18, "small", "2026"),
+  memory(19, "card", "2026"),
+  memory(20, "tall", "2026"),
+];
+
 
 export const timelineYears = ["2024", "2025", "2026"];

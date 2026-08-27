@@ -48,7 +48,7 @@ export function ParticleBackground({ intensity = 1, confetti = false }: Props) {
         vx: (Math.random() - 0.5) * 0.12,
         vy: -(Math.random() * 0.16 + 0.02),
         a: Math.random() * 0.5 + 0.12,
-        hue: HUES[Math.floor(Math.random() * HUES.length)],
+        hue: HUES[Math.floor(Math.random() * HUES.length)] ?? 265,
         star: Math.random() > 0.72,
       }));
     };

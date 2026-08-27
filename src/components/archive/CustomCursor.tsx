@@ -24,7 +24,7 @@ export function CustomCursor() {
         "[data-cursor],a,button,input,[role='button']",
       );
       setActive(!!el);
-      setLabel(el?.dataset.cursor ?? null);
+      setLabel(el?.dataset["cursor"] ?? null);
     };
     window.addEventListener("pointermove", move);
     document.documentElement.classList.add("cursor-none");
